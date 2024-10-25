@@ -1,9 +1,9 @@
 package server
 
 import (
-	"github.com/gorilla/websocket"
 	"net/http"
-	"time"
+
+	"github.com/gorilla/websocket"
 )
 
 var client_id int = -1
@@ -21,15 +21,15 @@ var upgrader = websocket.Upgrader{
 }
 
 type Object struct {
-	Owner       string    `json:"owner"`
-	Name        string    `json:"name"`
-	CreatedTime time.Time `json:"createdTime"`
-	UpdatedTime time.Time `json:"updatedTime"`
-	DeletedTime time.Time `json:"deletedTime"`
-	Id          string    `json:"id"`
-	ExternalId  string    `json:"externalId"`
-	Type        string    `json:"type"`
-	Password    string    `json:"password"`
+	Owner       string `json:"owner"`
+	Name        string `json:"name"`
+	CreatedTime string `json:"createdTime"`
+	UpdatedTime string `json:"updatedTime"`
+	DeletedTime string `json:"deletedTime"`
+	Id          string `json:"id"`
+	ExternalId  string `json:"externalId"`
+	Type        string `json:"type"`
+	Password    string `json:"password"`
 }
 
 type WebhookData struct {

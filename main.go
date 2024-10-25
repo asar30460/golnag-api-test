@@ -1,7 +1,8 @@
 package main
 
 import (
-	"example.com/gorilla-ws/server"
+	"example.com/golang-api-test/server"
+
 	"github.com/gin-gonic/gin"
 )
 

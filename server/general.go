@@ -2,10 +2,12 @@ package server
 
 import (
 	"encoding/json"
-	"github.com/gin-gonic/gin"
-	"github.com/gorilla/websocket"
 	"log"
 	"regexp"
+	"strings"
+
+	"github.com/gin-gonic/gin"
+	"github.com/gorilla/websocket"
 )
 
 type Server struct {
@@ -73,18 +75,19 @@ func (s *Server) HandleWS(ctx *gin.Context) {
 			log.Println("No match found")
 			continue
 		}
-		
+
 		matchStr := match.FindString(string(msg))
-		log.Println("String matched:", matchStr)
+		fixedStr := strings.Replace(matchStr, `"password":"***":false`, `"password":"***"`, -1)
+		log.Println("String matched:", fixedStr)
 
 		var result Object
-		err = json.Unmarshal([]byte(matchStr), &result)
+		err = json.Unmarshal([]byte(fixedStr), &result)
 		if err != nil {
 			log.Println(err)
 			return
 		}
 
-		log.Println(result)
+		log.Printf("result:%+v", result)
 
 		// 將訊息發送到廣播通道
 		s.broadcast <- string(msg)
